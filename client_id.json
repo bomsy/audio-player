@@ -1,0 +1,12 @@
+{
+  "web": {
+    "client_id":
+      "581933456681-iosj0moj2ui4ltm8kckpivv1sfcspmrf.apps.googleusercontent.com",
+    "project_id": "trafix-145817",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://www.googleapis.com/oauth2/v3/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "gQ5ZxuADytIfXDN8B1oHuddl",
+    "javascript_origins": ["http://localhost:8080", "http://192.168.0.3:8080"]
+  }
+}
