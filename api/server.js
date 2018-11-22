@@ -1,8 +1,11 @@
 const { google } = require("googleapis");
 const express = require("express");
+
 const clientInfo = require("../client_id.json");
+
 const opn = require("opn");
 const querystring = require("querystring");
+const bodyParser = require("body-parser");
 const url = require("url");
 
 const app = express();
@@ -31,6 +34,8 @@ const authorizeUrl = oauthClient.generateAuthUrl({
   scope: scopes.join(" ")
 });
 
+app.use(bodyParser.json());
+
 app.get("/oauth/redirect", async (req, res) => {
   const qs = querystring.parse(url.parse(req.url).query);
   res.end("Authentication successful! Please return to the console.");
@@ -45,13 +50,14 @@ app.get("/oauth/redirect", async (req, res) => {
   });
 });
 
-app.get("/authenticate", (req, res) => {
+app.post("/authenticate", (req, res) => {
   opn(authorizeUrl, { wait: false, app: "google chrome" }).then(cp =>
     cp.unref()
   );
 });
 
-app.get("/list", async (req, res) => {
+app.post("/list", async (req, res) => {
+  const { pageSize, q } = req.body;
   try {
     const params = { pageSize: 3 };
     params.q = "mimeType='audio/wav'";
